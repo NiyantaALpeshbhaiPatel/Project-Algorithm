@@ -1,27 +1,25 @@
 var fixedbox,movingbox
 
-
+var a,b;
 function setup() {
   createCanvas(800,400);
- fixedbox= createSprite(400, 200, 50, 50);
- movingbox=createSprite(400,200,70,40);
+ fixedbox= createSprite(100, 200, 50, 50);
+ movingbox=createSprite(700,200,70,40);
  fixedbox.shapeColor="Green";
  movingbox.shapeColor="Green";
+ fixedbox.velocityX=5;
+ movingbox.velocityX=-5;
+ a=createSprite(400,50,20,20);
+ b=createSprite(400,350,20,20);
+ a.velocityY=5;
+ b.velocityY=-5;
+
+
 }
 
 function draw() {
   background(255,255,255); 
-  movingbox.x=mouseX
-  movingbox.y=mouseY
-  if(movingbox.x-fixedbox.x<fixedbox.width/2+movingbox.width/2 &&
-    fixedbox.x-movingbox.x<fixedbox.width/2+movingbox.width/2 &&
-    movingbox.y-fixedbox.y<fixedbox.height/2+movingbox.height/2 &&
-    fixedbox.y-movingbox.y<fixedbox.height/2+movingbox.height/2 ){
-    fixedbox.shapeColor="Red";
-    movingbox.shapeColor="Red";
-  }else{
-    fixedbox.shapeColor="Green";
- movingbox.shapeColor="Green";
-  }
+  bounceoff(movingbox,fixedbox);
+  bounceoff(a,b);
   drawSprites();
 }
